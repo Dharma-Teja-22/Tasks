@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=in.0">
+    <title>Registration Form</title>
+    <style>
+        h2{
+            text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.753);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 30px;
+            color: black;
+            transition-duration: 1s;
+        }
+        h2:hover{
+            color: rgb(248, 201, 201);
+        }
+        form
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border: px #000 solid;
+            border-radius: 10px;
+            box-shadow: inset 5px 5px 20px gray;
+            padding: 15px 0px 0px 20px;
+            width: 50%;
+            height: 50%;
+            margin: auto;
+            align-items: center;
+            background-color:rgba(119, 230, 161, 0.397);
+            padding-top: 25px;
+            padding-bottom: 25px;
+            font-size: 18px;
+        }
+        #in, #vehicle, #fn, #ln, #eid
+        {
+            width: 300px;
+            border: none;
+            border-bottom: 1px gray solid ;
+            background-color: rgba(240, 248, 255, 0.603);
+
+        }
+        #tb
+        {
+            border: none;
+            border-bottom: 1px gray solid ;
+            background-color: rgba(240, 248, 255, 0.603);
+
+        }
+        #in1
+        {
+            width: 300px;
+            border: none;
+            border-bottom: 1px rgb(6, 75, 23) solid ;
+            background-color: rgba(240, 248, 255, 0.603);
+        }
+        #in2
+        {
+            width: 200px;
+            border: none;
+            background-color: rgba(240, 248, 255, 0.603);
+        }
+        .rad
+        {
+            display: flex;
+        }
+        body
+        {
+            padding-top: 5px ;
+            padding-bottom: 30px;
+            background-color: rgba(119, 230, 161, 0.397);
+        }
+        th{
+            font-weight: bold;
+        }
+        /*.hr{
+            border-bottom: 3px darkblue solid;
+            width: 30%;
+        } */
+    </style>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <div class="hr"></div>
+    
+    <form name="r_form" method="POST" onsubmit="GetData()">
+        <label>Enter First Name</label>
+        <input type="text" id="fn" placeholder="Enter first name" name="fn" onblur="FirstName();"/>
+        <label>Enter Last Name</label>
+        <input type="text" id="ln"   placeholder="Enter Last name" name="ln" onblur="LastName();"/>
+        <label>Enter Date of Birth</label>
+        <input type="date" id="in2" name="dt" onblur="DateVal()"/>
+        <label>Enter Email Id</label>
+        <input type="email" id="eid"   placeholder="Enter your email id" name="email" onblur="EmailVal()"/> 
+        <label>Enter Mobile Number</label>
+        <input type="text" id="in" name="mn"   placeholder="Enter your phone numeber" onblur="MobileNum()"/>
+        <lable>What is your Age</lable>
+        <input type="number" name="age" max="106" min="0" id="in"   placeholder="Enter your age" onblur="ValidateAge()"/>
+        <label>Gender</label>   
+        <div class="rad">
+            <input type="radio" name="gen" id="m" /> Male 
+            <input type="radio" name="gen" id="f"/> Female
+        </div>
+        <label>UserName</label> <input name="un" type="text" id="in"   placeholder="Enter user name" onblur="UserName()">
+        <label>Password</label> <input name="pwd" type="password" id="in"   placeholder="Enter password" onblur="Passwordd()">
+        <label>Address</label>  <textarea name="txta" rows="4" cols="5" id="in1"  placeholder="Enter Correct Address" onblur="ValAddress()"></textarea>
+        <label>Favourite Cities</label>
+            <span style="font-weight: lighter;" >
+                <input type="checkbox" name="city"> Visakhapatnma
+                <input type="checkbox" name="city"> Vizianagaram
+                <input type="checkbox" name="city"> Vijayawada
+                <input type="checkbox" name="city"> Others
+            </span>
+        <label for="vehicle">Choose your Favorite vehicle:</label>
+            <select id="vehicle"  name="vehicle1" onblur="SelectDD();">
+                <option value="empty"> </option>
+                <option value="car">Car</option>
+                <option vaOtherslue="bike">Bike</option>
+                <option value="truck">Truck</option>
+                <option value="scooter">Scooter</option>
+                <option value="bus">Bus</option>
+            </select>
+        <label><Center><b>Qualifications</b></Center></label>   
+        <Table>
+
+            <tr> 
+                <th> S.No </th>
+                <th> Examination </th>
+                <th> Percentage  </th>
+                <th> Year of passing </th>
+            </tr>
+        
+            <tr>
+                <td> 1</td>
+                <td>SSC</td>
+                <td><input type="text" id="tb"  name="per" onblur="CheckPerYr()"/></td>
+                <td><input type="text" id="tb"  name="yr" /></td>
+            </tr>
+
+            <tr>
+                <td> 2</td>
+                <td>Intermediate</td>
+                <td><input type="text" id="tb"  name="per" onblur="CheckPerYr()" /></td>
+                <td><input type="text" id="tb"  name="yr" /></td>
+            </tr>
+
+            <tr>
+                <td> 3</td>
+                <td>B.Tech</td>
+                <td><input type="text" id="tb"  name="per" onblur="CheckPerYr()" /></td>
+                <td><input type="text" id="tb"  name="yr" /></td>
+            </tr>
+
+        </Table>        
+        <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+        function GetData()
+        {
+            let radios = document.forms.r_form.gen;
+            let selected = false;
+            for(let i=0;i<radios.length;i++)
+            {
+                if(radios[i].checked)
+                {
+                    selected = true;
+                    break;
+                }
+            }
+            if(!selected) 
+                alert("gender not selected");
+
+            // console.log();
+            // var f_n = document.getElementsByName("fn");
+            // var l_n = document.getElementsByName("ln");
+            // var dob = document.getElementsByName("dt");
+            // var e_m = document.getElementsByName("email");
+            // var m_n = document.getElementsByName("mn");
+            // var age = document.getElementsByName("age");
+            // var gen = document.getElementsByName("gen");
+            // var u_n = document.getElementsByName("un");
+            // var pwd = document.getElementsByName("pwd");
+            // var f_c = document.getElementsByName("city");
+            // var v_n = document.getElementsByName("vehicle");
+            // FirstName();
+            // LastName();
+            // MobileNum();
+            // UserName();
+            // Passwordd();
+            // ValAddress();
+            // ValidateAge();
+
+            let chk = document.forms.r_form.city;
+            let sel = false;
+            for(let i=0;i<chk.length;i++)
+            {
+                if(chk[i].checked)
+                {
+                    sel = true;
+                    break;
+                }
+            }
+            if(!sel) 
+                alert("Favourite cities are not selected");
+            
+
+          
+        }
+        function FirstName()
+        {
+            var f_n = document.getElementsByName("fn")[0].value; 
+            var reqEx = /^[a-zA-Z]{6,}$/;
+            if(!(reqEx.test(f_n)))
+            {
+                alert("First name is invalid! Please enter at least 6 alphabetic characters.");
+                document.getElementById("fn").style="border: 2px red solid";
+            }
+            else    
+                document.getElementById("fn").style="border: none;";
+        }
+        function LastName()
+        {
+            var l_n = document.getElementsByName("ln")[0].value; 
+            var reqEx = /^[a-zA-Z]{6,}$/;
+            if(!(reqEx.test(l_n)))
+            {
+                alert("Last name is invalid! Please enter at least 6 alphabetic characters.");                
+                document.getElementById("ln").style="border: 2px red solid";
+            }
+            else        
+                document.getElementById("ln").style="border: none;";
+
+        }
+        function MobileNum()
+        {
+            var m_n = document.getElementsByName("mn")[0].value; 
+            var reqEx = /^[0-9]{10}$/;
+            if(!(reqEx.test(m_n)))
+            {
+                alert("Mobile number is invalid! Please enter exactly 10 digits.");                
+                return false;
+            }
+        }
+        function UserName()
+        {
+            var u_n = document.getElementsByName("un")[0].value; 
+            var reqEx = /^[a-zA-Z]{8,}$/;
+            if(!(reqEx.test(u_n)))
+            {
+                alert("User name is invalid! Please enter at least 6 alphabetic characters.");                
+                return false;
+            }
+        }
+        function Passwordd()
+        {
+            var pswd = document.getElementsByName("pwd")[0].value; 
+            var reqEx = /^[A-Z][a-zA-Z0-9]{7,}$/;
+            if(!(reqEx.test(pswd)))
+            {
+                alert("Password is invalid! Please enter at least 8 characters in the combination of AlphaNumeric!\n\nCheck the constraints\n\nFirst letter should be capital\nand followed by alphanumeric");                
+                return false;
+            }
+        }
+        function ValidateAge()
+        {
+            var age = document.getElementsByName("age")[0].value;
+            if(age>18 && age<40)
+            {
+                return true;
+            }
+            else
+            {
+                alert("This form belongs to the people who are aged in between 18 to 40!");
+                return false;
+            }
+        }
+        function EmailVal()
+        {
+            var e_m = document.getElementsByName("email")[0].value;
+            var val = e_m.endsWith("@gmail.com");
+            if(val)
+                return true;
+            else
+            {
+                alert("Check your E-Mail which contains @gmail.com at the end!");
+                return false;
+            }
+        }
+        function ValAddress()
+        {
+            var address = document.getElementsByName("txta")[0].value;
+            var reqEx = /^[0-9a-zA-z-_/, ]{4,}$/
+            if(reqEx.test(address))
+                return true;
+            else
+            {
+                alert("Enter address in the format of house number and area!");
+                return false;
+            }
+        }
+        function CheckPerYr()
+        {
+            var per = document.getElementsByName("per")[0].value;
+            if(per>4.5 && per<=10)
+            {
+                return true;
+            }
+            else
+            {
+                alert("Enter Correct Percentage(In between 4.5 to 10)");
+                return false;
+            }
+        }
+        function DateVal()
+        {
+            let date = document.getElementById("in2").value;
+            if(!date)
+            {
+                alert("Choose Date!");
+                document.getElementById("in2").style="border: 2px red solid";
+            }
+            else
+                document.getElementById("in2").style="border: none";
+        }
+
+   
+        function SelectDD() 
+        {
+            let dd = document.forms.r_form.elements.vehicle1;
+            if (dd.value == "empty")
+            {
+                alert("Vehicle not selected!"); 
+            }
+        }
+    </script>
+</body>
+</html>
